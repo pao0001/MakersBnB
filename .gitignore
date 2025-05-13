@@ -2,6 +2,3 @@ __pycache__
 .vscode
 .pytest_cache
 screenshot.png
-**venv**
-.env
-database_connection.py
