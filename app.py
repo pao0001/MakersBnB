@@ -6,7 +6,9 @@ from lib.database_connection import get_flask_database_connection
 app = Flask(__name__)
 
 # == Your Routes Here ==
-
+@app.route('/index/beach_side_property', methods=['GET'])
+def get_bs_property():
+    return render_template('beach_side_property.html')
 # GET /index
 # Returns the homepage
 # Try it:
