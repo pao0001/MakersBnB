@@ -3,3 +3,4 @@ __pycache__
 .pytest_cache
 screenshot.png
 *venv*
+lib/database_connection.py
