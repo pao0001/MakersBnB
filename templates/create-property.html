@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Property</title>
+</head>
+<body>
+    <h1>Add new Property</h1>
+    <form action="/properties" method="post">
+
+      <!-- We check to see if there are any errors from a previous submission -->
+      <!-- {% if errors %} -->
+        <!-- If so, we show them. -->
+        <!-- <p class="t-errors"> -->
+          <!-- There were errors with your submission: {{ errors }} -->
+        <!-- </p> -->
+      <!-- {% endif %} -->
+
+      <p>
+        <!-- These `label` tags are important for accessibility -->
+        <label for="name">Property name</label>
+
+        <!-- The `type` attribute says what kind of field this is -->
+        <!-- The `name` attribute says what parameter name should be sent to the server -->
+        <!-- The `id` field here is used to link it to the `for` tag in the label -->
+        <input type="text" name="name" id="name">
+      </p>
+      <p>
+        <label for="email">Email address</label>
+        <input type="text" name="email" id="email">
+      </p>
+      <p>
+        <label for="phone_number">Phone number</label>
+        <input type="text" name="phone_number" id="phone_number">
+      </p>
+      <p>
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address">
+      </p>
+      <p>
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description">
+      </p>
+      <p>
+        <label for="price_per_night">Price per night</label>
+        <input type="text" name="price_per_night" id="price_per_night">
+      </p>
+      <p>
+        <label for="availability">Availability</label>
+        <input type="text" name="availability" id="availability">
+      </p>
+      <p>
+        <label for="user_id">User ID</label>
+        <input type="text" name="user_id" id="user_id">
+      </p>
+      <p>
+        <!-- `type` is submit here, to indicate it is a button -->
+        <!-- `value` is used as the button's text -->
+        <input type="submit" value="Create Property">
+      </p>
+    </form>
+</body>
+</html>
