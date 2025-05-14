@@ -4,12 +4,13 @@
 
 {% block content %}
 <h1>Available Properties</h1>
-
+<h2>To add your property to MakersBnB please call: 07123456789</h2>
 {% for property in properties %}
     <div style="border: 1px solid #ccf; padding: 10px; margin: 10px 0;">
-        <h2><a href="{{ url_for('show_property', property_id=property.id) }}">{{ property.name }}</a></h2>
+        <h2><a href="{{ url_for('show_property', property_id=property.id) }}">{{ property.description }}</a></h2>
         <img src="{{ url_for('static', filename=property.image_filename) }}" alt="Image Placeholder" width="300">
-        <p>{{ property.description }}</p>
+        <p>{{ property.name }}</p>
+        <p>{{ property.phone_number }}</p>
     </div>
 {% else %}
     <p>No properties found.</p>
