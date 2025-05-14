@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, abort
+from flask import Flask, request, render_template, abort, redirect
 from lib.database_connection import get_flask_database_connection
 from lib.property_repository import PropertyRepository
 from lib.property import Property
@@ -35,15 +35,33 @@ def get_index():
 def get_create_property():
     return render_template('create-property.html')
 
+
 # Create a new 
-# @app.route('/create-property/created', method=['POST'])
-# def create_property():
-#     connection = get_flask_database_connection(app)
-#     repository = PropertyRepository(connection)
-
-#     new_property = Property(request.form['id'], request.form['name'], request.form['email'], request.form['phone_number'], request.form['address'], request.form['description'], request.form['price_per_night'], request.form['availability'], request.form['user_id'])
+@app.route('/', methods=['POST'])
+def create_property():
+    connection = get_flask_database_connection(app)
+    repository = PropertyRepository(connection)
 
 
+    name = request.form['name']
+    email = request.form['email']
+    phone_number = request.form['phone_number']
+    address = request.form['address']
+    description = request.form['description']
+    price_per_night = request.form['price_per_night']
+    availability = request.form['availability']
+    user_id = request.form['user_id']
+
+    new_property = Property(None, name, email, phone_number, 
+        address, description, price_per_night, 
+        availability, user_id
+        )
+    
+    # if not property.is_valid():
+    #     return render_template('/create-property.html', new_property=new_property, errors=new_property.generate_errors()), 400
+
+    new_property = repository.create(new_property)
+    return redirect (f'/{new_property.id}')
 
 
 # These lines start the server if you run this file directly

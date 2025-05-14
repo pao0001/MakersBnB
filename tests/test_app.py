@@ -18,7 +18,7 @@ from playwright.sync_api import Page, expect
 """
 Test route to a single property page
 """
-def test_get_property(db_connection, page, test_web_address):
+def test_show_property(db_connection, page, test_web_address):
     # We seed our database with the properties seed file
     db_connection.seed("seeds/bnb_seed.sql")
 
@@ -51,14 +51,47 @@ def test_get_property(db_connection, page, test_web_address):
     title_element = page.locator(".t-user_id")
     expect(title_element).to_have_text("UserID: 1")
 
-    # # We look at all the <li> tags
-    # list_items = page.locator("p")
 
-    # # We assert that it has the books in it
-    # expect(list_items).to_have_text([
-    #     "Invisible Cities by Italo Calvino",
-    #     "The Man Who Was Thursday by GK Chesterton",
-    #     "Bluets by Maggie Nelson",
-    #     "No Place on Earth by Christa Wolf",
-    #     "Nevada by Imogen Binnie",
-    # ])
+def test_create_property(db_connection, page, test_web_address):
+    # We seed our database with the properties seed file
+    db_connection.seed("seeds/bnb_seed.sql")
+
+    page.goto(f"http://{test_web_address}/")
+    page.click("text=here")
+
+    page.fill("input[name='name']", "cindy")
+    page.fill("input[name='email']", "cindy@ymail.co")
+    page.fill("input[name='phone_number']", "95849253")
+    page.fill("input[name='address']", "478 Pinetree Cove")    
+    page.fill("input[name='description']", "A rustic cottage")
+    page.fill("input[name='price_per_night']", "9000")
+    page.fill("input[name='availability']", "unavailable")
+    page.fill("input[name='user_id']", "1")    
+
+    page.click('input[value="Create Property"]')
+
+
+    title_element = page.locator(".t-name")
+    expect(title_element).to_have_text("Name: cindy")
+
+    title_element = page.locator(".t-email")
+    expect(title_element).to_have_text("Email: cindy@ymail.co")
+
+    title_element = page.locator(".t-phone_number")
+    expect(title_element).to_have_text("Phone Number: 95849253")
+
+    title_element = page.locator(".t-address")
+    expect(title_element).to_have_text("Address: 478 Pinetree Cove")
+
+    title_element = page.locator(".t-description")
+    expect(title_element).to_have_text("Description: A rustic cottage")
+
+    title_element = page.locator(".t-price_per_night")
+    expect(title_element).to_have_text("Price per night: 9000.00")
+
+    title_element = page.locator(".t-availability")
+    expect(title_element).to_have_text("Availability: unavailable")
+
+    title_element = page.locator(".t-user_id")
+    expect(title_element).to_have_text("UserID: 1")
+
