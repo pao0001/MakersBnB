@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>MakersBnB</title>
+{% extends "layout.html" %}
 
-        <!--
-            Head to https://github.com/makersacademy/web-applications-in-python/blob/main/pills/loading_css_or_static_files.md
-            If you're wondering how the CSS file below is being loaded.
-        -->
-        <link rel="stylesheet" href="/static/style.css" >
-    </head>
-    <body>
-        <h1>Welcome to MakersBnB Homepage.</h1>
-        <p>See our list of properties below</p>
-        <p>if you would like to list your property on MakersBnB please call</p>
-        <h4>07755235436</h4>
-        <a href="/index/beach_side_property">Beach Side Property</a>
+{% block title %}MyBnB Listings{% endblock %}
 
-    </body>
-</html>
+{% block content %}
+<h1>Available Properties</h1>
+
+{% for property in properties %}
+    <div style="border: 1px solid #ccf; padding: 10px; margin: 10px 0;">
+        <h2><a href="{{ url_for('show_property', property_id=property.id) }}">{{ property.name }}</a></h2>
+        <img src="{{ url_for('static', filename=property.image_filename) }}" alt="Image Placeholder" width="300">
+        <p>{{ property.description }}</p>
+    </div>
+{% else %}
+    <p>No properties found.</p>
+{% endfor %}
+
+{% endblock %}

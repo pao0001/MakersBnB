@@ -1,21 +1,32 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, abort
 from lib.database_connection import get_flask_database_connection
 
 # Create a new Flask app
 app = Flask(__name__)
 
 # == Your Routes Here ==
-@app.route('/index/beach_side_property', methods=['GET'])
-def get_bs_property():
-    return render_template('beach_side_property.html')
+@app.route('/<int:property_id>')
+def show_property(property_id):
+    connection = get_flask_database_connection(app)
+    rows = connection.execute("SELECT * FROM properties WHERE id = %s", [property_id])
+
+    if not rows:
+        abort(404)
+
+    property = rows[0]
+
+    return render_template('property.html', property=property)
+
 # GET /index
 # Returns the homepage
 # Try it:
 #   ; open http://localhost:5001/index
-@app.route('/index', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_index():
-    return render_template('index.html')
+    connection = get_flask_database_connection(app)
+    rows = connection.execute("SELECT * FROM properties")
+    return render_template('index.html', properties=rows)
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database

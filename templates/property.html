@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ property.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ property.title }}</h1>
+
+<img src="{{ url_for('static', filename=property.image_filename) }}" alt="{{ property.title }}" width="600">
+
+<p><strong>Name:</strong> {{ property.name }}</p>
+<p><strong>Email:</strong> {{ property.email }}</p>
+<p><strong>Phone Number:</strong> {{ property.phone_number }}</p>
+<p><strong>Address:</strong> {{ property.address }}</p>
+<p><strong>Description:</strong> {{ property.description }}</p>
+<p><strong>Price per night:</strong> {{ property.price_per_night }}</p>
+<p><strong>Availability:</strong> {{ property.availability }}</p>
+<p><strong>UserID:</strong> {{ property.user_id }}</p>
+
+<a href="/">← Back to all properties</a>
+{% endblock %}
