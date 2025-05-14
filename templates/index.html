@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>Available Properties</h1>
-<h2>To add your property to MakersBnB please call: 07123456789</h2>
+<h2>To add your property to MakersBnB please click <a href="/create-property">here</a> call: 07123456789</h2>
 {% for property in properties %}
     <div style="border: 1px solid #ccf; padding: 10px; margin: 10px 0; background-color: rgb(255, 241, 173);">
         <h2><a href="{{ url_for('show_property', property_id=property.id) }}">{{ property.description }}</a></h2>
