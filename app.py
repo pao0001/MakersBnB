@@ -1,10 +1,10 @@
 import os
-from flask import Flask, request, render_template, abort
+from flask import Flask, request, redirect, render_template, abort, url_for, flash
 from lib.database_connection import get_flask_database_connection
 
 # Create a new Flask app
 app = Flask(__name__)
-
+app.secret_key = '02z[^=~3F(qL'
 # == Your Routes Here ==
 @app.route('/<int:property_id>')
 def show_property(property_id):
@@ -17,6 +17,26 @@ def show_property(property_id):
     property = rows[0]
 
     return render_template('property.html', property=property)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    from lib.password_authenticator import PasswordAuthenticator
+    if request.method == 'POST':
+        connection = get_flask_database_connection(app)
+        email = request.form['email']
+        password = request.form['password']
+        user = PasswordAuthenticator(email, password, connection)
+        if user.authenticate():
+            flash('Login Successful', 'success')
+            return redirect(url_for('get_index'))
+        else:
+            flash('Invalid email or password!', 'error')
+            return redirect(url_for('login'))
+    return render_template('login.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    return render_template('signup.html')
 
 # GET /index
 # Returns the homepage

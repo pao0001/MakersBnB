@@ -1,0 +1,23 @@
+<!-- templates/login.html -->
+{% extends "layout.html" %}
+
+{% block title %}Login - MyBnB{% endblock %}
+
+{% block content %}
+    <h1>Login</h1>
+
+    <form action="/login" method="post">
+        <p>
+            <label for="email">Email address</label><br>
+            <input type="email" name="email" id="email" required>
+        </p>
+        <p>
+            <label for="password">Password</label><br>
+            <input type="password" name="password" id="password" required>
+        </p>
+        <p>
+            <input type="submit" value="Login">
+        </p>
+    </form>
+
+{% endblock %}
