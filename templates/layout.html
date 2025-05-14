@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <title>{% block title %}MyBnB{% endblock %}</title>
 </head>
-<body>
+<body style="background-color: beige;">
+    <h1><a href="/">MakersBnB</a></h1>
     <nav>
-        <a href="/">Home</a>
+        <a href="/login">Login</a>
     </nav>
-
+    <nav>
+        <a href="/signup">Signup</a> 
+    </nav>
+    
     <hr>
 
     {% block content %}{% endblock %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li style="color: orangered">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
     <hr>
     <footer>&copy; 2025 MakersBnB</footer>
