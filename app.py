@@ -45,7 +45,7 @@ def property_request():
             return redirect('/property_request')
 
         try:
-            msg = Message('Propertuy Booking Request', 
+            msg = Message('Property Booking Request', 
                 sender='makersbnbgsai@gmail.com',  
                 recipients=['makersbnbgsai@gmail.com'])
             msg.body = f"Name: {name}\nUser Email: {email}\nFrom: {from_date}\nTo: {to_date}\n\nMessage:\n{message}"
