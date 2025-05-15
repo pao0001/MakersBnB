@@ -9,7 +9,7 @@
     <div style="border: 1px solid #ccf; padding: 10px; margin: 10px 0; background-color: rgb(255, 241, 173);">
         <h2>{{ property.description }}</h2>
         <a href="{{ url_for('show_property', property_id=property.id) }}">
-            <img src="{{ house_images[property.id] }}" alt="Property image" width="300">
+            <img src="{{ house_images[property.id] }}" alt="Property image" width="300" data-testid="property-image-{{ property.id }}">
         </a>
         <p>{{ property.name }}</p>
         <p>{{ property.phone_number }}</p>

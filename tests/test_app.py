@@ -25,7 +25,7 @@ def test_show_property(db_connection, page, test_web_address):
     # We load a virtual browser and navigate to the /<int:property_id> page
     page.goto(f"http://{test_web_address}/")
 
-    page.click("text=A lovely place to stay.")
+    page.click('[data-testid="property-image-1"]')
 
     title_element = page.locator(".t-name")
     expect(title_element).to_have_text("Name: John Doe")
@@ -99,24 +99,24 @@ def test_create_property(db_connection, page, test_web_address):
 When we delete a property. the property will be removed from property list page
 """
 
-def test_delete_book(db_connection, page, test_web_address):
+def test_delete_property(db_connection, page, test_web_address):
     db_connection.seed("seeds/bnb_seed.sql")
     page.goto(f"http://{test_web_address}/")
-    current_property_for_delete = page.locator("text=A lovely place to stay.")
+    current_property_for_delete = page.locator('[data-testid="property-image-1"]')
     expect(current_property_for_delete).to_be_visible()
-    page.click("text=A lovely place to stay.")
+    page.click('[data-testid="property-image-1"]')
     page.once("dialog", lambda dialog: dialog.accept())
     page.click("text=Delete Property")
-    lakehouse_description = page.locator("text=Peaceful lake house with mountain views.")
-    expect(lakehouse_description).to_be_visible()
-    deleted_property = page.locator("text=A lovely place to stay.")
+    current_property_for_delete = page.locator('[data-testid="property-image-2"]')
+    expect(current_property_for_delete).to_be_visible()
+    deleted_property = page.locator('[data-testid="property-image-1"]')
     expect(deleted_property).not_to_be_visible()
 
 # """
 # When a property is updated via update method, the property list will display the changes
 # """
 
-# def test_update_book(db_connection, page, test_web_address):
+# def test_update_property(db_connection, page, test_web_address):
 #     db_connection.seed("seeds/bnb_seed.sql")
 #     page.goto(f"http://{test_web_address}/")
 #     page.click("text=A lovely place to stay.")

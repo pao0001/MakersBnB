@@ -149,6 +149,15 @@ def get_index():
     rows = connection.execute("SELECT * FROM properties")
     return render_template('index.html', properties=rows, house_images=house_images)
 
+# Delete a property from property list
+@app.route('/delete/<int:property_id>', methods=['POST'])
+def delete_property(property_id):
+    connection = get_flask_database_connection(app)
+    repository = PropertyRepository(connection)
+    repository.delete(property_id)
+    return redirect(url_for('get_index'))
+
+
 # Update a property from property list
 @app.route('/update/<int:property_id>', methods=['POST'])
 def update_property(property_id):
