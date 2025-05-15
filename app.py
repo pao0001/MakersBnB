@@ -13,22 +13,26 @@ from lib.password_manager import PasswordManager
 app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'giulianopaolini1991@gmail.com'
-app.config['MAIL_PASSWORD'] = 'ioyisepfpeakqvci'
+# app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+# app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_USERNAME'] = 'makersbnbgsai@gmail.com'
+app.config['MAIL_PASSWORD'] = 'lpnauzcgvvizznur'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
+# app.secret_key = os.getenv('SECRET_CODE')
 app.secret_key = '02z[^=~3F(qL'
 
 
 mail = Mail(app)
 # Create a list of house images (30 long as of now)
+
 house_images = get_image_url_from_search("home")
 
 # == Your Routes Here ==
 
 # MAIL APP
 @app.route('/property_request', methods=['GET', 'POST'])
-def contact():
+def property_request():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
@@ -41,9 +45,9 @@ def contact():
             return redirect('/property_request')
 
         try:
-            msg = Message('Contact Form Submission', 
-                sender='giulianopaolini1991@gmail.com',  
-                recipients=['giulianopaolini1991@gmail.com'])
+            msg = Message('Propertuy Booking Request', 
+                sender='makersbnbgsai@gmail.com',  
+                recipients=['makersbnbgsai@gmail.com'])
             msg.body = f"Name: {name}\nUser Email: {email}\nFrom: {from_date}\nTo: {to_date}\n\nMessage:\n{message}"
             mail.send(msg)
             flash('Message sent successfully!', 'success')
@@ -54,6 +58,32 @@ def contact():
     return render_template('property_request.html')
 
 # END MAIL APP
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+
+
+        if not name or not email or not message:
+            flash('All fields are required.', 'warning')
+            return redirect('/property_request')
+
+        try:
+            msg = Message('Contact Form Submission', 
+                sender='makersbnbgsai@gmail.com',  
+                recipients=['makersbnbgsai@gmail.com'])
+            msg.body = f"Name: {name}\nUser Email: {email}\n\nMessage:\n{message}"
+            mail.send(msg)
+            flash('Message sent successfully!', 'success')
+        except Exception as e:
+            flash(f'Failed to send message. Error: {str(e)}', 'danger')
+        return redirect('/contact')
+
+    return render_template('contact.html')
+
 
 
 @app.route('/<int:property_id>')
