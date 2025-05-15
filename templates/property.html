@@ -20,9 +20,62 @@
     <input type="submit" value="Delete Property">
 </form>
 
-<form method="POST" action="/update/{{ property.id }}" onsubmit="event.preventDefault(); window.open('/edit/{{ property.id }}', 'UpdateProperty', 'width=600,height=400'); return false;">
-    <input type="submit" value="Update Property">
+<form onsubmit="event.preventDefault();" class="d-inline">
+    <input type="submit" class="btn btn-primary mt-3" value="Update Property" data-bs-toggle="modal" data-bs-target="#editPropertyModal">
 </form>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editPropertyModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form method="POST" action="/update/{{ property.id }}">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Property #{{ property.id }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" value="{{ property.name }}">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" name="email" id="email" value="{{ property.email }}">
+          </div>
+          <div class="mb-3">
+            <label for="phone_number" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{ property.phone_number }}">
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" name="address" id="address" value="{{ property.address }}">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" name="description" id="description" value="{{ property.description }}">
+          </div>
+          <div class="mb-3">
+            <label for="price_per_night" class="form-label">Price per Night</label>
+            <input type="text" class="form-control" name="price_per_night" id="price_per_night" value="{{ property.price_per_night }}">
+          </div>
+          <div class="mb-3">
+            <label for="availability" class="form-label">Availability</label>
+            <input type="text" class="form-control" name="availability" id="availability" value="{{ property.availability }}">
+          </div>
+          <div class="mb-3">
+            <label for="user_id" class="form-label">User ID</label>
+            <input type="text" class="form-control" name="user_id" id="user_id" value="{{ property.user_id }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <input type="submit" value="Save Changes" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <a href="/">← Back to all properties</a>
 {% endblock %}
