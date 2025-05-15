@@ -109,6 +109,40 @@ def get_index():
     rows = connection.execute("SELECT * FROM properties")
     return render_template('index.html', properties=rows, house_images=house_images)
 
+# Update a property from property list
+@app.route('/update/<int:property_id>', methods=['POST'])
+def update_property(property_id):
+    connection = get_flask_database_connection(app)
+    repository = PropertyRepository(connection)
+    
+    name = request.form['name']
+    print(f"[DEBUG] Received name: {name}")
+    email = request.form['email']
+    phone_number = request.form['phone_number']
+    address = request.form['address']
+    description = request.form['description']
+    price_per_night = request.form['price_per_night']
+    availability = request.form['availability']
+    user_id = request.form['user_id']
+
+    updated_property = Property(property_id, name, email, phone_number, 
+        address, description, price_per_night, 
+        availability, user_id
+        )
+
+
+    repository.update(updated_property)
+    
+    return redirect(url_for('edit_property', property_id=property_id))
+
+# Edit a property pop up window
+@app.route('/edit/<int:property_id>', methods=['GET'])
+def edit_property(property_id):
+    connection = get_flask_database_connection(app)
+    repository = PropertyRepository(connection)
+    property = repository.find(property_id)
+    return render_template('edit-property.html', property=property)
+
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
 # if started in test mode.
