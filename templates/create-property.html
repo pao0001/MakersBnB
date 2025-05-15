@@ -10,7 +10,9 @@
   <div class="container mt-5">
     <h1 class="mb-4" >Add new Property</h1>
     <form action="/" method="post"> <!--Currently posting to route-->
-
+<!-- templates/create_property.html -->
+    <h1>Add new Property</h1>
+    <form action="/properties" method="post">
       <!-- We check to see if there are any errors from a previous submission -->
       <!-- {% if errors %} -->
         <!-- If so, we show them. -->
@@ -18,11 +20,11 @@
           <!-- There were errors with your submission: {{ errors }} -->
         <!-- </p> -->
       <!-- {% endif %} -->
-
+      \
       <div class="mb-3">
         <!-- These `label` tags are important for accessibility -->
         <label for="name"></label>
-
+        <label for="name">Property name:</label><br>
         <!-- The `type` attribute says what kind of field this is -->
         <!-- The `name` attribute says what parameter name should be sent to the server -->
         <!-- The `id` field here is used to link it to the `for` tag in the label -->
