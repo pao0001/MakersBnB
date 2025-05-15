@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Property</title>
-</head>
-<body>
+<!-- templates/create_property.html -->
+{% extends "layout.html" %}
+
+{% block title %}Create Properties - MyBnB{% endblock %}
+
+{% block content %}
     <h1>Add new Property</h1>
-    <form action="/" method="post"> <!--Currently posting to route-->
+    <form action="/properties" method="post">
 
       <!-- We check to see if there are any errors from a previous submission -->
       <!-- {% if errors %} -->
@@ -19,7 +17,7 @@
 
       <p>
         <!-- These `label` tags are important for accessibility -->
-        <label for="name">Property name</label>
+        <label for="name">Property name:</label><br>
 
         <!-- The `type` attribute says what kind of field this is -->
         <!-- The `name` attribute says what parameter name should be sent to the server -->
@@ -27,31 +25,31 @@
         <input type="text" name="name" id="name">
       </p>
       <p>
-        <label for="email">Email address</label>
+        <label for="email">Email address:</label><br>
         <input type="text" name="email" id="email">
       </p>
       <p>
-        <label for="phone_number">Phone number</label>
+        <label for="phone_number">Phone number:</label><br>
         <input type="text" name="phone_number" id="phone_number">
       </p>
       <p>
-        <label for="address">Address</label>
+        <label for="address">Address:</label><br>
         <input type="text" name="address" id="address">
       </p>
       <p>
-        <label for="description">Description</label>
+        <label for="description">Description:</label><br>
         <input type="text" name="description" id="description">
       </p>
       <p>
-        <label for="price_per_night">Price per night</label>
+        <label for="price_per_night">Price per nigh:t</label><br>
         <input type="text" name="price_per_night" id="price_per_night">
       </p>
       <p>
-        <label for="availability">Availability</label>
+        <label for="availability">Availability:</label><br>
         <input type="text" name="availability" id="availability">
       </p>
       <p>
-        <label for="user_id">User ID</label>
+        <label for="user_id">User ID:</label><br>
         <input type="text" name="user_id" id="user_id">
       </p>
       <p>
@@ -60,5 +58,5 @@
         <input type="submit" value="Create Property">
       </p>
     </form>
-</body>
-</html>
+
+{% endblock %}
