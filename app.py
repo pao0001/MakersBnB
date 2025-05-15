@@ -22,7 +22,7 @@ def show_property(property_id):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    from lib.password_authenticator import PasswordAuthenticator
+    from lib.password_manager import PasswordAuthenticator
     if request.method == 'POST':
         connection = get_flask_database_connection(app)
         email = request.form['email']
