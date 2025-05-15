@@ -3,17 +3,19 @@
 {% block title %}MyBnB Listings{% endblock %}
 
 {% block content %}
-<h1>Available Properties</h1>
-<h2>To add your property to MakersBnB please click <a href="/create-property">here</a> call: 07123456789</h2>
-{% for property in properties %}
-    <div style="border: 1px solid #ccf; padding: 10px; margin: 10px 0; background-color: rgb(255, 241, 173);">
-        <h2>{{ property.description }}</h2>
-        <a href="{{ url_for('show_property', property_id=property.id) }}">
-            <img src="{{ house_images[property.id] }}" alt="Property image" width="300" data-testid="property-image-{{ property.id }}">
-        </a>
-        <p>{{ property.name }}</p>
-        <p>{{ property.phone_number }}</p>
+
+<h1 style="text-align: center;">Available Properties</h1>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+        {% for property in properties %}
+        <div style="border: 1px solid #ccf; padding: 10px; margin: 10px 0; background-color: rgb(255, 241, 173); flex: 0 0 48%; text-align: center;">
+            <h2>{{ property.description }}</h2>
+            <a href="{{ url_for('show_property', property_id=property.id) }}">
+                <img src="{{ house_images[property.id] }}" alt="Property image" style="width: 100%; max-height: 300px; object-fit: cover;">
+            </a>
+            <h4>{{ property.name }}</h4>
+            <h5>{{ property.phone_number }}</h5>
+        </div>
+        {% endfor %}
     </div>
-{% endfor %}
 
 {% endblock %}
