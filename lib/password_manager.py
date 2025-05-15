@@ -1,7 +1,7 @@
-from lib.user_repository import UserRepository
 import bcrypt
+from lib.user_repository import UserRepository
 
-class PasswordAuthenticator:
+class PasswordManager:
     def __init__(self, email, password, connection):
         self.email = email
         self.password = password
@@ -10,14 +10,13 @@ class PasswordAuthenticator:
 
     def authenticate(self):
         for user in self.users:
-            if user.email == self.email and user.password_hash == self.password:
-                print('True')
-                return True
+            if user.email == self.email:
+                # Check hashed password
+                if bcrypt.checkpw(self.password.encode('utf-8'), user.password_hash.encode('utf-8')):
+                    print('Authenticated')
+                    return True
+        print('Authentication failed')
+        return False
 
-class PasswordHasher:
-    def __init__(self, password):
-        self.password = password
-        self.hashed_password = None
-    
     def hash_password(self):
-        self.hashed_password =bcrypt.hashpw(self.password)
+        return bcrypt.hashpw(self.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
