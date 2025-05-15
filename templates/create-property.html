@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Property</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Add new Property</h1>
+  <div class="container mt-5">
+    <h1 class="mb-4" >Add new Property</h1>
     <form action="/" method="post"> <!--Currently posting to route-->
 
       <!-- We check to see if there are any errors from a previous submission -->
@@ -17,48 +19,50 @@
         <!-- </p> -->
       <!-- {% endif %} -->
 
-      <p>
+      <div class="mb-3">
         <!-- These `label` tags are important for accessibility -->
-        <label for="name">Property name</label>
+        <label for="name"></label>
 
         <!-- The `type` attribute says what kind of field this is -->
         <!-- The `name` attribute says what parameter name should be sent to the server -->
         <!-- The `id` field here is used to link it to the `for` tag in the label -->
-        <input type="text" name="name" id="name">
-      </p>
-      <p>
-        <label for="email">Email address</label>
-        <input type="text" name="email" id="email">
-      </p>
-      <p>
-        <label for="phone_number">Phone number</label>
-        <input type="text" name="phone_number" id="phone_number">
-      </p>
-      <p>
-        <label for="address">Address</label>
-        <input type="text" name="address" id="address">
-      </p>
-      <p>
-        <label for="description">Description</label>
-        <input type="text" name="description" id="description">
-      </p>
-      <p>
-        <label for="price_per_night">Price per night</label>
-        <input type="text" name="price_per_night" id="price_per_night">
-      </p>
-      <p>
-        <label for="availability">Availability</label>
-        <input type="text" name="availability" id="availability">
-      </p>
-      <p>
-        <label for="user_id">User ID</label>
-        <input type="text" name="user_id" id="user_id">
-      </p>
-      <p>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Property name">
+      </div>
+      <div class="mb-3">
+        <label for="email"></label>
+        <input type="text" class="form-control" name="email" id="email" placeholder="Email address">
+      </div>
+      <div class="mb-3">
+        <label for="phone_number"></label>
+        <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Phone number">
+      </div>
+      <div class="mb-3">
+        <label for="address"></label>
+        <input type="text" class="form-control" name="address" id="address" placeholder="Address">
+      </div>
+      <div class="mb-3">
+        <label for="description"></label>
+        <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+      </div>
+      <div class="mb-3">
+        <label for="price_per_night"></label>
+        <input type="text" class="form-control" name="price_per_night" id="price_per_night" placeholder="Price per night">
+      </div>
+      <div class="mb-3">
+        <label for="availability"></label>
+        <input type="text" class="form-control" name="availability" id="availability" placeholder="Availability">
+      </div>
+      <div class="mb-3">
+        <label for="user_id"></label>
+        <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User ID">
+      </div>
+      <div class="mb-3">
         <!-- `type` is submit here, to indicate it is a button -->
         <!-- `value` is used as the button's text -->
-        <input type="submit" value="Create Property">
-      </p>
+        <input type="submit" value="Create Property" class="btn btn-primary">
+      </div>
     </form>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
