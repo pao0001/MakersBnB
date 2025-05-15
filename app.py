@@ -182,15 +182,15 @@ def update_property(property_id):
 
     repository.update(updated_property)
     
-    return redirect(url_for('edit_property', property_id=property_id))
+    return redirect(url_for('show_property', property_id=property_id))
 
 # Edit a property pop up window
-@app.route('/edit/<int:property_id>', methods=['GET'])
-def edit_property(property_id):
-    connection = get_flask_database_connection(app)
-    repository = PropertyRepository(connection)
-    property = repository.find(property_id)
-    return render_template('edit-property.html', property=property)
+# @app.route('/edit/<int:property_id>', methods=['GET'])
+# def edit_property(property_id):
+#     connection = get_flask_database_connection(app)
+#     repository = PropertyRepository(connection)
+#     property = repository.find(property_id)
+#     return render_template('edit-property.html', property=property)
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
