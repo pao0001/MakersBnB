@@ -20,5 +20,9 @@
     <input type="submit" value="Delete Property">
 </form>
 
+<form method="POST" action="/update/{{ property.id }}" onsubmit="event.preventDefault(); window.open('/edit/{{ property.id }}', 'UpdateProperty', 'width=600,height=400'); return false;">
+    <input type="submit" value="Update Property">
+</form>
+
 <a href="/">← Back to all properties</a>
 {% endblock %}

@@ -20,21 +20,21 @@ def show_property(property_id):
 
     return render_template('property.html', property=property)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    from lib.password_manager import PasswordAuthenticator
-    if request.method == 'POST':
-        connection = get_flask_database_connection(app)
-        email = request.form['email']
-        password = request.form['password']
-        user = PasswordAuthenticator(email, password, connection)
-        if user.authenticate():
-            flash('Login Successful', 'success')
-            return redirect(url_for('get_index'))
-        else:
-            flash('Invalid email or password!', 'error')
-            return redirect(url_for('login'))
-    return render_template('login.html')
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     from lib.password_manager import PasswordAuthenticator
+#     if request.method == 'POST':
+#         connection = get_flask_database_connection(app)
+#         email = request.form['email']
+#         password = request.form['password']
+#         user = PasswordAuthenticator(email, password, connection)
+#         if user.authenticate():
+#             flash('Login Successful', 'success')
+#             return redirect(url_for('get_index'))
+#         else:
+#             flash('Invalid email or password!', 'error')
+#             return redirect(url_for('login'))
+#     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -90,6 +90,40 @@ def delete_property(property_id):
     repository = PropertyRepository(connection)
     repository.delete(property_id)
     return redirect(url_for('get_index'))
+
+# Update a property from property list
+@app.route('/update/<int:property_id>', methods=['POST'])
+def update_property(property_id):
+    connection = get_flask_database_connection(app)
+    repository = PropertyRepository(connection)
+    
+    name = request.form['name']
+    print(f"[DEBUG] Received name: {name}")
+    email = request.form['email']
+    phone_number = request.form['phone_number']
+    address = request.form['address']
+    description = request.form['description']
+    price_per_night = request.form['price_per_night']
+    availability = request.form['availability']
+    user_id = request.form['user_id']
+
+    updated_property = Property(property_id, name, email, phone_number, 
+        address, description, price_per_night, 
+        availability, user_id
+        )
+
+
+    repository.update(updated_property)
+    
+    return redirect(url_for('edit_property', property_id=property_id))
+
+# Edit a property pop up window
+@app.route('/edit/<int:property_id>', methods=['GET'])
+def edit_property(property_id):
+    connection = get_flask_database_connection(app)
+    repository = PropertyRepository(connection)
+    property = repository.find(property_id)
+    return render_template('edit-property.html', property=property)
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database

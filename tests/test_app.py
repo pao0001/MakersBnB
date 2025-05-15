@@ -111,3 +111,13 @@ def test_delete_book(db_connection, page, test_web_address):
     expect(lakehouse_description).to_be_visible()
     deleted_property = page.locator("text=A lovely place to stay.")
     expect(deleted_property).not_to_be_visible()
+
+# """
+# When a property is updated via update method, the property list will display the changes
+# """
+
+# def test_update_book(db_connection, page, test_web_address):
+#     db_connection.seed("seeds/bnb_seed.sql")
+#     page.goto(f"http://{test_web_address}/")
+#     page.click("text=A lovely place to stay.")
+
