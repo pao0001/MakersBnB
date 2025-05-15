@@ -4,9 +4,40 @@
 {% block title %}Signup - MyBnB{% endblock %}
 
 {% block content %}
-    <h1>Signup</h1>
-
+  <div class="container mt-5">
+    <h1 class="mb-4" >Signup</h1>
     <form action="/signup" method="post">
+      <!-- We check to see if there are any errors from a previous submission -->
+      <!-- {% if errors %} -->
+        <!-- If so, we show them. -->
+        <!-- <p class="t-errors"> -->
+          <!-- There were errors with your submission: {{ errors }} -->
+        <!-- </p> -->
+      <!-- {% endif %} -->
+      <div class="mb-3">
+        <!-- These `label` tags are important for accessibility -->
+        <!-- The `type` attribute says what kind of field this is -->
+        <!-- The `name` attribute says what parameter name should be sent to the server -->
+        <!-- The `id` field here is used to link it to the `for` tag in the label -->
+        <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email"></label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+      </div>
+      <div class="mb-3">
+        <label for="phone_number"></label>
+        <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Phone number" required>
+      </div>
+      <div class="mb-3">
+        <label for="password"></label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+      </div>
+      <div class="mb-3">
+        <!-- `type` is submit here, to indicate it is a button -->
+        <!-- `value` is used as the button's text -->
+        <input type="submit" value="Signup" class="btn btn-primary">
+      </div>
     </form>
-
+  </div>
 {% endblock %}
