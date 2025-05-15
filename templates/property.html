@@ -16,5 +16,9 @@
 <p class="t-availability"><strong>Availability:</strong> {{ property.availability }}</p>
 <p class="t-user_id"><strong>UserID:</strong> {{ property.user_id }}</p>
 
+<form method="POST" action="/delete/{{ property.id }}" onsubmit="return confirm('Are you sure you want to delete this property?');">
+    <input type="submit" value="Delete Property">
+</form>
+
 <a href="/">← Back to all properties</a>
 {% endblock %}

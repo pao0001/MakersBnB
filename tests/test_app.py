@@ -95,3 +95,19 @@ def test_create_property(db_connection, page, test_web_address):
     title_element = page.locator(".t-user_id")
     expect(title_element).to_have_text("UserID: 1")
 
+"""
+When we delete a property. the property will be removed from property list page
+"""
+
+def test_delete_book(db_connection, page, test_web_address):
+    db_connection.seed("seeds/bnb_seed.sql")
+    page.goto(f"http://{test_web_address}/")
+    current_property_for_delete = page.locator("text=A lovely place to stay.")
+    expect(current_property_for_delete).to_be_visible()
+    page.click("text=A lovely place to stay.")
+    page.once("dialog", lambda dialog: dialog.accept())
+    page.click("text=Delete Property")
+    lakehouse_description = page.locator("text=Peaceful lake house with mountain views.")
+    expect(lakehouse_description).to_be_visible()
+    deleted_property = page.locator("text=A lovely place to stay.")
+    expect(deleted_property).not_to_be_visible()

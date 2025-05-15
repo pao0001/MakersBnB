@@ -56,7 +56,7 @@ def get_create_property():
     return render_template('create-property.html')
 
 
-# Create a new 
+# Create a new property
 @app.route('/', methods=['POST'])
 def create_property():
     connection = get_flask_database_connection(app)
@@ -83,6 +83,13 @@ def create_property():
     new_property = repository.create(new_property)
     return redirect (f'/{new_property.id}')
 
+# Delete a property from property list
+@app.route('/delete/<int:property_id>', methods=['POST'])
+def delete_property(property_id):
+    connection = get_flask_database_connection(app)
+    repository = PropertyRepository(connection)
+    repository.delete(property_id)
+    return redirect(url_for('get_index'))
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
