@@ -20,21 +20,21 @@ def show_property(property_id):
 
     return render_template('property.html', property=property)
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     from lib.password_manager import PasswordAuthenticator
-#     if request.method == 'POST':
-#         connection = get_flask_database_connection(app)
-#         email = request.form['email']
-#         password = request.form['password']
-#         user = PasswordAuthenticator(email, password, connection)
-#         if user.authenticate():
-#             flash('Login Successful', 'success')
-#             return redirect(url_for('get_index'))
-#         else:
-#             flash('Invalid email or password!', 'error')
-#             return redirect(url_for('login'))
-#     return render_template('login.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    from lib.password_manager import PasswordAuthenticator
+    if request.method == 'POST':
+        connection = get_flask_database_connection(app)
+        email = request.form['email']
+        password = request.form['password']
+        user = PasswordAuthenticator(email, password, connection)
+        if user.authenticate():
+            flash('Login Successful', 'success')
+            return redirect(url_for('get_index'))
+        else:
+            flash('Invalid email or password!', 'error')
+            return redirect(url_for('login'))
+    return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
