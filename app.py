@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, render_template, abort, url_for, flash
+from flask import Flask, request, session, redirect, render_template, abort, url_for, flash
 from flask_mail import Mail, Message
 from lib.database_connection import get_flask_database_connection
 from lib.property_repository import PropertyRepository
@@ -25,8 +25,7 @@ app.secret_key = '02z[^=~3F(qL'
 
 mail = Mail(app)
 # Create a list of house images (30 long as of now)
-
-house_images = get_image_url_from_search("home")
+house_images = get_image_url_from_search("cosy cottage")
 
 # == Your Routes Here ==
 
@@ -96,7 +95,7 @@ def show_property(property_id):
 
     property = rows[0]
 
-    return render_template('property.html', property=property)
+    return render_template('property.html', property=property, house_images=house_images)
 
 # GET&POST /login 
 # returns login and authenticates login
@@ -110,6 +109,7 @@ def login():
         password = request.form['password']
         user = PasswordManager(email, password, connection)
         if user.authenticate():
+            session['user_email'] = email
             flash('Login Successful', 'success')
             return redirect(url_for('get_index'))
         else:

@@ -2,28 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}MyBnB{% endblock %}</title>
+    <title>{% block title %}MakersBnB{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/makersbnb_logo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body style="font-family: roboto; background-color: beige;">
-    <h1 style="text-align: center;">
-        <br >
-        <a href="/">MakersBnB</a>
-    </h1>
-    <nav style="display: flex; justify-content: flex-end; padding-right: 40px;">
-        <a href="/login">Login</a>
-    </nav>
-    <nav style="display: flex; justify-content: flex-end; padding-right: 40px;">
-        <a href="/signup">Signup</a> 
-    </nav>
-    <nav style="display: flex; justify-content: flex-end; padding-right: 40px;">
-        <a href="/property_request">Book a Property</a> 
-    </nav>
-    <nav style="display: flex; justify-content: flex-end; padding-right: 40px;">
-        <a href="/create-property">Add a property for rent</a>
-    </nav>
 
-    
+<body style="background-color: beige;">
+    <a href="/">
+        <img src="{{ url_for('static', filename='images/makersbnb.png') }}" alt="MakersBNB logo" width="250">
+    </a>
+    <!-- Login and Signup aligned right -->
+    <div style="
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    ">
+        <a href="/login" class="btn btn-outline-primary me-2">Login</a>
+        <a href="/signup" class="btn btn-primary">Signup</a><br>
+        <a href="/property_request">Book a Property</a>
+        <a href="/create-property">Add a property for rent</a>
+    </div>
+  
     <hr>
 
     {% block content %}{% endblock %}
