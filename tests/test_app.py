@@ -25,7 +25,7 @@ def test_show_property(db_connection, page, test_web_address):
     # We load a virtual browser and navigate to the /<int:property_id> page
     page.goto(f"http://{test_web_address}/")
 
-    page.click('[data-testid="property-image-1"]')
+    page.click('text=A lovely place to stay.')
 
     title_element = page.locator(".t-name")
     expect(title_element).to_have_text("Name: John Doe")
@@ -43,13 +43,13 @@ def test_show_property(db_connection, page, test_web_address):
     expect(title_element).to_have_text("Description: A lovely place to stay.")
 
     title_element = page.locator(".t-price_per_night")
-    expect(title_element).to_have_text("Price per night: 100.00")
+    expect(title_element).to_have_text("Price per night: £100.00")
 
     title_element = page.locator(".t-availability")
-    expect(title_element).to_have_text("Availability: available")
+    expect(title_element).to_have_text("Availability: 2025-05-15,2025-05-20")
 
     title_element = page.locator(".t-user_id")
-    expect(title_element).to_have_text("UserID: 1")
+    expect(title_element).to_have_text("User ID: 1")
 
 
 def test_create_property(db_connection, page, test_web_address):
@@ -57,7 +57,7 @@ def test_create_property(db_connection, page, test_web_address):
     db_connection.seed("seeds/bnb_seed.sql")
 
     page.goto(f"http://{test_web_address}/")
-    page.click("text=here")
+    page.click("text=List a Property")
 
     page.fill("input[name='name']", "cindy")
     page.fill("input[name='email']", "cindy@ymail.co")
@@ -87,13 +87,13 @@ def test_create_property(db_connection, page, test_web_address):
     expect(title_element).to_have_text("Description: A rustic cottage")
 
     title_element = page.locator(".t-price_per_night")
-    expect(title_element).to_have_text("Price per night: 9000.00")
+    expect(title_element).to_have_text("Price per night: £9000.00")
 
     title_element = page.locator(".t-availability")
     expect(title_element).to_have_text("Availability: unavailable")
 
     title_element = page.locator(".t-user_id")
-    expect(title_element).to_have_text("UserID: 1")
+    expect(title_element).to_have_text("User ID: 1")
 
 """
 When we delete a property. the property will be removed from property list page
@@ -102,22 +102,27 @@ When we delete a property. the property will be removed from property list page
 def test_delete_property(db_connection, page, test_web_address):
     db_connection.seed("seeds/bnb_seed.sql")
     page.goto(f"http://{test_web_address}/")
-    current_property_for_delete = page.locator('[data-testid="property-image-1"]')
+    current_property_for_delete = page.locator("text=A lovely place to stay.")
     expect(current_property_for_delete).to_be_visible()
-    page.click('[data-testid="property-image-1"]')
+    page.click("text=A lovely place to stay.")
     page.once("dialog", lambda dialog: dialog.accept())
     page.click("text=Delete Property")
-    current_property_for_delete = page.locator('[data-testid="property-image-2"]')
+    current_property_for_delete = page.locator("text=Charming countryside cottage with garden.")
     expect(current_property_for_delete).to_be_visible()
-    deleted_property = page.locator('[data-testid="property-image-1"]')
+    deleted_property = page.locator("text=A lovely place to stay")
     expect(deleted_property).not_to_be_visible()
 
-# """
-# When a property is updated via update method, the property list will display the changes
-# """
+"""
+When a property is updated via update method, the property list will display the changes
+"""
 
-# def test_update_property(db_connection, page, test_web_address):
-#     db_connection.seed("seeds/bnb_seed.sql")
-#     page.goto(f"http://{test_web_address}/")
-#     page.click("text=A lovely place to stay.")
+def test_update_property(db_connection, page, test_web_address):
+    db_connection.seed("seeds/bnb_seed.sql")
+    page.goto(f"http://{test_web_address}/")
+    page.click("text=A lovely place to stay.")
+    page.click('text=Update Property')
+    page.fill("input[name='name']", "cindy")
+    page.click('text=Save Changes')
+    title_element = page.locator(".t-name")
+    expect(title_element).to_have_text("Name: cindy")
 
