@@ -3,6 +3,7 @@
 {% block title %}MakersBnB | Listings{% endblock %}
 
 {% block content %}
+
 <!-- Heading as a card -->
 <div style="
     border: 1px solid black;
@@ -43,7 +44,7 @@
                 flex-shrink: 0;
             ">
                 <a href="{{ url_for('show_property', property_id=property.id) }}">
-                    <img src="{{ house_images[property.id] }}" alt="Property image" width="100%">
+                    <img src="{{ house_images[property.id] }}" alt="Property image" style="width: 100%; max-height: 300px; object-fit: cover;">
                 </a>
                 <h3>{{ property.description.split()[:5] | join(' ') }}{% if property.description.split()|length > 5 %}...{% endif %}</h2>
                 <p>{{ property.address }}</p>
