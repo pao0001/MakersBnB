@@ -1,23 +1,36 @@
 <!-- templates/login.html -->
 {% extends "layout.html" %}
 
-{% block title %}Login - MyBnB{% endblock %}
+{% block title %}MakersBnB | Login{% endblock %}
 
 {% block content %}
-    <h1>Login</h1>
-
-    <form action="/login" method="post">
-        <p>
-            <label for="email">Email address</label><br>
-            <input type="email" name="email" id="email" required>
-        </p>
-        <p>
-            <label for="password">Password</label><br>
-            <input type="password" name="password" id="password" required>
-        </p>
-        <p>
-            <input type="submit" value="Login">
-        </p>
-    </form>
-
+<div style="
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <div style="
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        min-width: 500px;
+    ">
+        <h1 class="text-center">Login</h1>
+        <form action="/login" method="post">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" name="email" id="email" required class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" required class="form-control">
+            </div>
+            <div class="d-grid">
+                <input type="submit" value="Login" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

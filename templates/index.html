@@ -1,19 +1,47 @@
 {% extends "layout.html" %}
 
-{% block title %}MyBnB Listings{% endblock %}
+{% block title %}MakersBnB | Listings{% endblock %}
 
 {% block content %}
-<h1>Available Properties</h1>
-<h2>To add your property to MakersBnB please click <a href="/create-property">here</a> call: 07123456789</h2>
-{% for property in properties %}
-    <div style="border: 1px solid #ccf; padding: 10px; margin: 10px 0; background-color: rgb(255, 241, 173);">
-        <h2>{{ property.description }}</h2>
-        <a href="{{ url_for('show_property', property_id=property.id) }}">
-            <img src="{{ house_images[property.id] }}" alt="Property image" width="300">
-        </a>
-        <p>{{ property.name }}</p>
-        <p>{{ property.phone_number }}</p>
-    </div>
-{% endfor %}
+<!-- Heading as a card -->
+<div style="
+    border: 1px solid black;
+    padding: 20px;
+    background-color: rgb(245, 157, 157);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+">
+    <h1 style="margin: 0;">Available Properties</h1>
+</div>
+<h4>To add your property to MakersBnB please click <a href="/create-property">here</a> call: 07123456789</h4>
 
+<!-- Grid container -->
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+
+    {% for property in properties %}
+        <!-- Each card -->
+        <div style="
+            border: 1px solid rgb(0, 0, 0);
+            padding: 10px;
+            background-color: rgb(245, 157, 157);
+            width: 300px;
+            box-sizing: border-box;
+            border-radius: 12px;
+            flex-shrink: 0;
+        ">
+            <a href="{{ url_for('show_property', property_id=property.id) }}">
+                <img src="{{ house_images[property.id] }}" alt="Property image" width="100%">
+            </a>
+            <h2>{{ property.description.split()[:5] | join(' ') }}{% if property.description.split()|length > 5 %}...{% endif %}</h2>
+            <p>{{ property.address }}</p>
+            <p>From £{{ property.price_per_night }} / night</p>
+        </div>
+    {% endfor %}
+
+</div>
 {% endblock %}

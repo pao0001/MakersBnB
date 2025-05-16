@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, render_template, abort, url_for, flash
+from flask import Flask, request, session, redirect, render_template, abort, url_for, flash
 from flask_mail import Mail, Message
 from lib.database_connection import get_flask_database_connection
 from lib.property_repository import PropertyRepository
@@ -80,6 +80,7 @@ def login():
         password = request.form['password']
         user = PasswordManager(email, password, connection)
         if user.authenticate():
+            session['user_email'] = email
             flash('Login Successful', 'success')
             return redirect(url_for('get_index'))
         else:

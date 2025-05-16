@@ -1,65 +1,54 @@
 <!-- templates/create_property.html -->
 {% extends "layout.html" %}
 
-{% block title %}Create Property - MyBnB{% endblock %}
+{% block title %}Create Property - MakersBnB{% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
-    <h1 class="mb-4" >Add new Property</h1>
-    <form action="/" method="post"> <!--Currently posting to route-->
-<!-- templates/create_property.html -->
-    <form action="/properties" method="post">
-      <!-- We check to see if there are any errors from a previous submission -->
-      <!-- {% if errors %} -->
-        <!-- If so, we show them. -->
-        <!-- <p class="t-errors"> -->
-          <!-- There were errors with your submission: {{ errors }} -->
-        <!-- </p> -->
-      <!-- {% endif %} -->
-      <div class="mb-3">
-        <!-- These `label` tags are important for accessibility -->
-        <!--<label for="name"></label>--!>
-
-        <!-- The `type` attribute says what kind of field this is -->
-        <!-- The `name` attribute says what parameter name should be sent to the server -->
-        <!-- The `id` field here is used to link it to the `for` tag in the label -->
-        <label for="name"></label>
-        <input type="text" class="form-control" name="name" id="name" placeholder="Property name">
-      </div>
-      <div class="mb-3">
-        <label for="email"></label>
-        <input type="text" class="form-control" name="email" id="email" placeholder="Email address">
-      </div>
-      <div class="mb-3">
-        <label for="phone_number"></label>
-        <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Phone number">
-      </div>
-      <div class="mb-3">
-        <label for="address"></label>
-        <input type="text" class="form-control" name="address" id="address" placeholder="Address">
-      </div>
-      <div class="mb-3">
-        <label for="description"></label>
-        <input type="text" class="form-control" name="description" id="description" placeholder="Description">
-      </div>
-      <div class="mb-3">
-        <label for="price_per_night"></label>
-        <input type="text" class="form-control" name="price_per_night" id="price_per_night" placeholder="Price per night">
-      </div>
-      <div class="mb-3">
-        <label for="availability"></label>
-        <input type="text" class="form-control" name="availability" id="availability" placeholder="Availability">
-      </div>
-      <div class="mb-3">
-        <label for="user_id"></label>
-        <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User ID">
-      </div>
-      <div class="mb-3">
-        <!-- `type` is submit here, to indicate it is a button -->
-        <!-- `value` is used as the button's text -->
-        <input type="submit" value="Create Property" class="btn btn-primary">
-      </div>
-    </form>
-  </div>
-
+<div style="
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <div style="
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        min-width: 500px;
+        width: 100%;
+        max-width: 600px;
+    ">
+        <h1 class="text-center mb-4">Add New Property</h1>
+        <form action="/properties" method="post">
+            <div class="mb-3">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Property name" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email address" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Phone number" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="description" id="description" placeholder="Description" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="price_per_night" id="price_per_night" placeholder="Price per night" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="availability" id="availability" placeholder="Availability" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User ID" required>
+            </div>
+            <div class="d-grid">
+                <input type="submit" value="Create Property" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
