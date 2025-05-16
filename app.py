@@ -144,7 +144,7 @@ def get_create_property():
 # Posts new property to repo and adds to homepage
 # Try it:
 #   ; open http://localhost:5001/index
-@app.route('/', methods=['POST'])
+@app.route('/properties', methods=['POST'])
 def create_property():
     connection = get_flask_database_connection(app)
     repository = PropertyRepository(connection)
