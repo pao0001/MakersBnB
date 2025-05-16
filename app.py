@@ -25,7 +25,7 @@ app.secret_key = '02z[^=~3F(qL'
 
 mail = Mail(app)
 # Create a list of house images (30 long as of now)
-house_images = get_image_url_from_search("cosy cottage")
+house_images = get_image_url_from_search("cosy house")
 
 # == Your Routes Here ==
 
@@ -72,7 +72,7 @@ def contact():
 
         try:
             msg = Message('Contact Form Submission', 
-                sender='makersbnbgsai@gmail.com',  
+                sender='makersbnb',  
                 recipients=['makersbnbgsai@gmail.com'])
             msg.body = f"Name: {name}\nUser Email: {email}\n\nMessage:\n{message}"
             mail.send(msg)
